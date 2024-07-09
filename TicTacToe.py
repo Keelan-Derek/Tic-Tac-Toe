@@ -91,32 +91,66 @@ def isBoardFull(board):
         return True
 
 def main():
+    import sys
+
     print("Welcome to Tic Tac Toe!")
-    printBoard(board)
 
-    while not (isBoardFull(board)):
-        if not (isWinner(board, 'O')):
-            playerMove()
-            printBoard(board)
-        else:
-            print('Sorry, but O has won this time!')
-            break
+    prompt = input("Press y to continue:  ")
 
-        if not (isWinner(board, 'X')):
-            move = compMove()
-            if move == 0:
-                print('Tie Game!')
-            else:
-                insertLetter('O', move)
-                print('Computer placed an "O" in position', move , ':')
+    while prompt == "y":
+        printBoard(board)
+
+        while not (isBoardFull(board)):
+            if not (isWinner(board, 'O')):
+                playerMove()
                 printBoard(board)
-        else:
-            print('Congratulations, X has won this time!')
-            break
+            else:
+                print('Sorry, but O has won this time!')
+                break
 
-    if isBoardFull(board):
-        print("This game has ended in a tie!")
+            if not (isWinner(board, 'X')):
+                move = compMove()
+                if move == 0:
+                    print('Tie Game!')
+                else:
+                    insertLetter('O', move)
+                    print('Computer placed an "O" in position', move , ':')
+                    printBoard(board)
+            else:
+                print('Congratulations, X has won this time!')
+                break
+
+        if isBoardFull(board):
+            print("This game has ended in a tie!")
         
-while True:
-    input('Would you like to play again?')
-    main ()
+        replay = input("Would you like to play again? Press y to continue:  ")
+
+        while replay == "y":
+                printBoard(board)
+
+                while not (isBoardFull(board)):
+                    if not (isWinner(board, 'O')):
+                        playerMove()
+                        printBoard(board)
+                    else:
+                        print('Sorry, but O has won this time!')
+                        break
+
+                    if not (isWinner(board, 'X')):
+                        move = compMove()
+                        if move == 0:
+                            print('Tie Game!')
+                        else:
+                            insertLetter('O', move)
+                            print('Computer placed an "O" in position', move , ':')
+                            printBoard(board)
+                    else:
+                        print('Congratulations, X has won this time!')
+                        break
+
+                if isBoardFull(board):
+                    print("This game has ended in a tie!")
+        else:
+            sys.exit()
+
+main ()
