@@ -89,6 +89,10 @@ def isBoardFull(board):
         return False
     else:
         return True
+    
+def resetBoard():
+    global board
+    board = [' ' for x in range(10)]
 
 def main():
     import sys
@@ -98,6 +102,7 @@ def main():
     prompt = input("Press y to continue:  ")
 
     while prompt == "y":
+        resetBoard()
         printBoard(board)
 
         while not (isBoardFull(board)):
@@ -112,6 +117,7 @@ def main():
                 move = compMove()
                 if move == 0:
                     print('Tie Game!')
+                    break
                 else:
                     insertLetter('O', move)
                     print('Computer placed an "O" in position', move , ':')
@@ -124,33 +130,10 @@ def main():
             print("This game has ended in a tie!")
         
         replay = input("Would you like to play again? Press y to continue:  ")
+        if replay.lower() != 'y':
+            break
+        elif replay.lower() == 'y':
+            continue
 
-        while replay == "y":
-                printBoard(board)
-
-                while not (isBoardFull(board)):
-                    if not (isWinner(board, 'O')):
-                        playerMove()
-                        printBoard(board)
-                    else:
-                        print('Sorry, but O has won this time!')
-                        break
-
-                    if not (isWinner(board, 'X')):
-                        move = compMove()
-                        if move == 0:
-                            print('Tie Game!')
-                        else:
-                            insertLetter('O', move)
-                            print('Computer placed an "O" in position', move , ':')
-                            printBoard(board)
-                    else:
-                        print('Congratulations, X has won this time!')
-                        break
-
-                if isBoardFull(board):
-                    print("This game has ended in a tie!")
-        else:
-            sys.exit()
-
-main ()
+if __name__ == "__main__":
+    main ()
