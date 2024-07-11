@@ -95,7 +95,6 @@ def resetBoard():
     board = [' ' for x in range(10)]
 
 def main():
-    import sys
 
     print("Welcome to Tic Tac Toe!")
 
